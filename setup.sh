@@ -29,7 +29,7 @@ echo "This repo was setup using [r00's AdventOfCodeSetup script](https://github.
 
 # Setup the folders for each day.
 echo "Setting up day folders and template files."
-for i in {1..31}
+for i in {1..25}
 do
     mkdir "$GITDIR/Day $i"
     touch "$GITDIR/Day $i/input.txt"
