@@ -16,7 +16,7 @@ mkdir $GITDIR
 
 # Create the repo.
 echo "Initializing the git repo."
-git init $GITDIR
+git init $GITDIR 2>/dev/null
 cp resources/gitignore.txt $GITDIR/.gitignore
 
 # Create README.md
@@ -40,10 +40,6 @@ do
 done
 
 # Commit everything to git.
-# Setup repo online.
-echo ""
-echo "Go to https://github.com/new and setup a new repository called $GITDIR. A README and gitignore will be provided by this script. Paste the url below."
-read URL
 
 # Attach local repo to remote.
 echo "Adding files to git."
@@ -51,14 +47,23 @@ cd $GITDIR
 git add --all
 
 echo "Creating initial commit."
-git commit -m "Setup repo foundation."
+git commit -m "Setup repo foundation." 1>/dev/null
 
 git branch -M main
 
-echo "Modifying git remote."
-git remote add origin $URL
+# Setup repo online.
+echo ""
+echo "Go to https://github.com/new and setup a new repository called $GITDIR. A README and gitignore will be provided by this script. Paste the url below."
+read URL
 
-echo "Pushing."
-git push -u origin main
+if [[ -z "$URL" ]]; then
+    echo "No url given, please set up git remote manually."
+else
+    echo "Modifying git remote."
+    git remote add origin $URL
+
+    echo "Pushing."
+    git push -u origin main
+fi
 
 echo "Done"
