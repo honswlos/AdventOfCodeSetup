@@ -59,11 +59,12 @@ read URL
 if [[ -z "$URL" ]]; then
     echo "No url given, please set up git remote manually."
 else
-    echo "Modifying git remote."
+    echo "Setting git remote to $URL"
     git remote add origin $URL
 
     echo "Pushing."
     git push -u origin main
 fi
 
-echo "Done"
+echo
+echo "Done!  Project saved to $GITDIR"
