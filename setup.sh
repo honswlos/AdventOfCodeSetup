@@ -11,7 +11,11 @@ echo ""
 # Create a folder for the git repo.
 echo "Creating parent directory."
 DATE=$(date +"%Y")
-GITDIR="$HOME/src/AdventOfCode$DATE"
+if [[ -d $GIT_REPO_DIR ]]; then
+    GITDIR="$GIT_REPO_DIR/AdventOfCode$DATE"
+else
+    GITDIR="$HOME/src/AdventOfCode$DATE"
+fi
 mkdir $GITDIR
 
 # Create the repo.
